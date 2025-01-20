@@ -1,5 +1,10 @@
-import "@/styles/globals.css";
+import { Reset } from "styled-reset";
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Reset />
+      <Component {...pageProps} />
+    </>
+  );
 }
