@@ -1,8 +1,8 @@
 import Layout from "@/components/Layout";
+import GlobalStyle from "@/styles/GlobalStyle";
 import theme from "@/styles/theme";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Reset } from "styled-reset";
 
 export default function App({ Component, pageProps }) {
   const [isClient, setIsClient] = useState(false);
@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
   return (
     isClient && (
       <ThemeProvider theme={theme}>
-        <Reset />
+        <GlobalStyle />
         <Layout>
           <Component {...pageProps} />
         </Layout>
