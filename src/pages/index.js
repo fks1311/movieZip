@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { fetchKoficDateData } from "@/utiils/_api";
 import { line_break } from "@/utiils/lineBreak";
-import { KOFIC_Daily, KOFIC_Weekly } from "@/utiils/date";
+import { fetchKMDBData, fetchKoficData } from "@/utiils/_api";
+import { dateFormat } from "@/utiils/date";
 import Image from "next/image";
 import styled from "styled-components";
-import poster from "@/utiils/blankImg.svg";
 
-export default function Home({ dailyBoxOffice, weeklyBoxOffice }) {
+export default function Home({ dailyFilter, weeklyFilter, weeklyBoxOffice }) {
+  const daily = dailyFilter.sort((a, b) => a.rank - b.rank);
+  const weekly = weeklyFilter.sort((a, b) => a.rank - b.rank);
+
   return (
     <Main>
       <Title>
@@ -15,11 +17,11 @@ export default function Home({ dailyBoxOffice, weeklyBoxOffice }) {
       </Title>
       <MovieContainer>
         <MovieFrame>
-          <MovieType>{line_break(dailyBoxOffice.boxofficeType)}</MovieType>
+          <MovieType>{line_break("일별 박스오피스")}</MovieType>
           <MovieList>
-            {dailyBoxOffice.dailyBoxOfficeList.map((movie, idx) => (
+            {daily.map((movie, idx) => (
               <Movie key={idx}>
-                <Image src={poster} alt="poster" />
+                <Image src={movie.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
                 <MovieItem>
                   <div className="rank">{movie.rank}</div>
                   <div className="info">
@@ -34,13 +36,12 @@ export default function Home({ dailyBoxOffice, weeklyBoxOffice }) {
         </MovieFrame>
         <MovieFrame>
           <div className="weekyType">
-            <MovieType>{line_break(weeklyBoxOffice.boxofficeType)}</MovieType>
-            <p>{weeklyBoxOffice.showRange}</p>
+            <MovieType>{line_break("주말 박스오피스")}</MovieType>
           </div>
           <MovieList>
-            {weeklyBoxOffice.weeklyBoxOfficeList.map((movie, idx) => (
+            {weekly.map((movie, idx) => (
               <Movie key={idx}>
-                <Image src={poster} alt="poster" />
+                <Image src={movie.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
                 <MovieItem>
                   <div className="rank">{movie.rank}</div>
                   <div className="info">
@@ -59,22 +60,34 @@ export default function Home({ dailyBoxOffice, weeklyBoxOffice }) {
 }
 
 export async function getStaticProps() {
-  const dailyDate = KOFIC_Daily();
-  const weeklyDate = KOFIC_Weekly();
+  const dailyDate = dateFormat(1);
+  const weeklyDate = dateFormat(7);
 
-  const [daily, weekly] = await Promise.all([
-    fetchKoficDateData("searchDailyBoxOfficeList", dailyDate),
-    fetchKoficDateData("searchWeeklyBoxOfficeList", weeklyDate),
+  const [daily, weekly, kmdb] = await Promise.all([
+    fetchKoficData("searchDailyBoxOfficeList", dailyDate),
+    fetchKoficData("searchWeeklyBoxOfficeList", weeklyDate),
+    fetchKMDBData(90),
   ]);
+  const dailyFilter = kmdb.Data[0].Result.filter((kmdbCode) =>
+    daily.boxOfficeResult.dailyBoxOfficeList.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, ""))
+  ).map((item1) => ({
+    ...item1,
+    ...daily.boxOfficeResult.dailyBoxOfficeList.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
+  }));
 
-  // const [dailyData, weeklyData] = await Promise.all(
-  //   types.map(type => fetchBoxOfficeData(type, targetDate))
-  // );
+  const weeklyFilter = kmdb.Data[0].Result.filter((kmdbCode) =>
+    weekly.boxOfficeResult.weeklyBoxOfficeList.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, ""))
+  ).map((item1) => ({
+    ...item1,
+    ...weekly.boxOfficeResult.weeklyBoxOfficeList.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
+  }));
 
   return {
     props: {
       dailyBoxOffice: daily.boxOfficeResult,
       weeklyBoxOffice: weekly.boxOfficeResult,
+      dailyFilter,
+      weeklyFilter,
     },
   };
 }
@@ -83,10 +96,8 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10rem;
   color: white;
-  height: 150vh;
-  overflow: hidden;
+  padding: 3em 0px;
 `;
 
 const Title = styled.div`
@@ -94,7 +105,8 @@ const Title = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  margin-top: 5rem;
+  // margin-top: 5rem;
+  padding: 10rem;
   h1 {
     font-size: 10rem;
     letter-spacing: 0.5rem;
@@ -135,14 +147,13 @@ const MovieList = styled(motion.div)`
   padding: 3rem;
   overflow-x: scroll;
   img {
-    height: 30vh;
     width: 30vw;
-    object-fit: cover;
+    height: 50vh;
+    object-fit: fill;
     border-radius: 10px;
   }
 `;
 const Movie = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,6 +172,8 @@ const MovieItem = styled.div`
     gap: 1rem;
     .name {
       font-size: 1.5rem;
+      letter-spacing: 0.2rem;
+      line-height: 2rem;
     }
   }
 `;

@@ -6,9 +6,9 @@ const Min10 = (date) => {
   return date < 10 ? `0${date}` : date;
 };
 
-const KOFIC_Daily = () => {
+const dateFormat = (period) => {
   const today = new Date();
-  const todayAgo = new Date(today.setDate(today.getDate() - 1));
+  const todayAgo = new Date(today.setDate(today.getDate() - period));
 
   const YYYY = todayAgo.getFullYear();
   const MM = todayAgo.getMonth() + 1;
@@ -17,15 +17,4 @@ const KOFIC_Daily = () => {
   return `${YYYY}${Min10(MM)}${Min10(DD)}`;
 };
 
-const KOFIC_Weekly = () => {
-  const today = new Date();
-  const todayAgo = new Date(today.setDate(today.getDate() - 7));
-
-  const YYYY = todayAgo.getFullYear();
-  const MM = todayAgo.getMonth() + 1;
-  const DD = todayAgo.getDate();
-
-  return `${YYYY}${Min10(MM)}${Min10(DD)}`;
-};
-
-export { KOFIC_Daily, KOFIC_Weekly };
+export { dateFormat };
