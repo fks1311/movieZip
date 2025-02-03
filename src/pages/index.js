@@ -2,12 +2,24 @@ import { motion } from "framer-motion";
 import { line_break } from "@/utiils/lineBreak";
 import { fetchKMDBData, fetchKoficData } from "@/utiils/_api";
 import { dateFormat } from "@/utiils/date";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function Home({ dailyFilter, weeklyFilter, weeklyBoxOffice }) {
+export default function Home({ dailyFilter, weeklyFilter }) {
+  const router = useRouter();
   const daily = dailyFilter.sort((a, b) => a.rank - b.rank);
   const weekly = weeklyFilter.sort((a, b) => a.rank - b.rank);
+
+  const onClick = (movie) => {
+    router.push(
+      {
+        pathname: `detail/${movie.movieSeq}`,
+        query: { movieData: JSON.stringify(movie) },
+      },
+      `/detail/${movie.movieId}/${movie.movieSeq}`
+    );
+  };
 
   return (
     <Main>
@@ -20,14 +32,15 @@ export default function Home({ dailyFilter, weeklyFilter, weeklyBoxOffice }) {
           <MovieType>{line_break("일별 박스오피스")}</MovieType>
           <MovieList>
             {daily.map((movie, idx) => (
-              <Movie key={idx}>
+              <Movie key={idx} onClick={() => onClick(movie)}>
                 <Image src={movie.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
-                <MovieItem>
+                <MovieItem sel={movie.rating}>
                   <div className="rank">{movie.rank}</div>
                   <div className="info">
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
+                    <span id="rating">{movie.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
@@ -37,17 +50,20 @@ export default function Home({ dailyFilter, weeklyFilter, weeklyBoxOffice }) {
         <MovieFrame>
           <div className="weekyType">
             <MovieType>{line_break("주말 박스오피스")}</MovieType>
+            {/* <p>{weeklyBoxOffice.showRange}</p> */}
+            <p>* 지난 주 기준</p>
           </div>
           <MovieList>
             {weekly.map((movie, idx) => (
-              <Movie key={idx}>
+              <Movie key={idx} onClick={() => onClick(movie)}>
                 <Image src={movie.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
-                <MovieItem>
+                <MovieItem sel={movie.rating}>
                   <div className="rank">{movie.rank}</div>
                   <div className="info">
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
+                    <span id="rating">{movie.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
@@ -66,8 +82,9 @@ export async function getStaticProps() {
   const [daily, weekly, kmdb] = await Promise.all([
     fetchKoficData("searchDailyBoxOfficeList", dailyDate),
     fetchKoficData("searchWeeklyBoxOfficeList", weeklyDate),
-    fetchKMDBData(90),
+    fetchKMDBData({ dts: 90, count: 300 }),
   ]);
+
   const dailyFilter = kmdb.Data[0].Result.filter((kmdbCode) =>
     daily.boxOfficeResult.dailyBoxOfficeList.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, ""))
   ).map((item1) => ({
@@ -129,7 +146,7 @@ const MovieFrame = styled.div`
     align-items: center;
     gap: 0.5rem;
     p {
-      font-size: 0.8rem;
+      font-size: 1rem;
       letter-spacing: 0.2rem;
     }
   }
@@ -147,7 +164,7 @@ const MovieList = styled(motion.div)`
   padding: 3rem;
   overflow-x: scroll;
   img {
-    width: 30vw;
+    width: 25vw;
     height: 50vh;
     object-fit: fill;
     border-radius: 10px;
@@ -164,7 +181,7 @@ const MovieItem = styled.div`
   align-items: center;
   gap: 2rem;
   .rank {
-    font-size: 6rem;
+    font-size: 8.5rem;
   }
   .info {
     display: flex;
@@ -174,6 +191,20 @@ const MovieItem = styled.div`
       font-size: 1.5rem;
       letter-spacing: 0.2rem;
       line-height: 2rem;
+    }
+    #rating {
+      color: ${({ sel, theme }) => {
+        switch (sel) {
+          case "전체관람가":
+            return theme.all;
+          case "12세이상관람가":
+            return theme._12;
+          case "15세이상관람가":
+            return theme._15;
+          case "청소년관람불가":
+            return theme._19;
+        }
+      }};
     }
   }
 `;
