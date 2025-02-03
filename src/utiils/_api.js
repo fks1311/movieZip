@@ -13,7 +13,7 @@ const fetchKoficData = async (type, targetDt) => {
   return response.data;
 };
 
-const fetchKMDBData = async (Dts, Dte) => {
+const fetchKMDBData = async (value) => {
   // const baseURL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
   // const params = { ServiceKey: process.env.NEXT_PUBLIC_KMDB_KEY, collection: "kmdb_new2", detail: "Y" };
   // const queryString = new URLSearchParams(params).toString();
@@ -27,11 +27,12 @@ const fetchKMDBData = async (Dts, Dte) => {
       ServiceKey: process.env.NEXT_PUBLIC_KMDB_KEY,
       collection: "kmdb_new2",
       detail: "Y",
-      releaseDts: dateFormat(Dts),
-      listCount: 300,
+      releaseDts: value.dts ? dateFormat(value.dts) : "",
+      listCount: value.count ?? "",
+      movieId: value.movieId,
+      movieSeq: value.movieSeq,
     },
   });
-
   return response.data;
 };
 
