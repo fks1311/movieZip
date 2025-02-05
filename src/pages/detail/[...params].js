@@ -78,6 +78,7 @@ const Main = styled.main`
   gap: 3rem;
   padding: 8em 2em;
   color: white;
+  letter-spacing: 0.15rem;
 `;
 const Movie = styled.div`
   width: 60%;
@@ -131,7 +132,7 @@ const Info = styled.div`
 
 const Plots = styled.div`
   width: 60%;
-  font-family: Freesentation-9Black;
+  font-family: HakgyoansimWoojuR;
   font-size: 1.5rem;
 `;
 
@@ -146,7 +147,7 @@ const Stills = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   span {
-    font-family: Freesentation-9Black;
+    font-family: HakgyoansimWoojuR;
     font-size: 2rem;
   }
   #still-count {
