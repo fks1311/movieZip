@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Badge from "./Badge";
 import Image from "next/image";
 import { fetchKMDBData } from "@/utiils/_api";
+import Spinner from "@/components/Spinner";
 
 export default function Genre() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function Genre() {
     <Layout>
       <Badge cur={cur} setCur={setCur} />
       {isLoading ? (
-        <></>
+        <Spinner />
       ) : (
         <Frame>
           {movie === undefined ? (
@@ -79,3 +80,9 @@ const Container = styled.div`
   color: white;
   letter-spacing: 0.3rem;
 `;
+
+/**
+ * 500개씩 api 요청
+ * 장르 button 상태관리 적용
+ * 개봉 최신순 정렬
+ */
