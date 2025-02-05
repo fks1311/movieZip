@@ -28,11 +28,14 @@ const fetchKMDBData = async (value) => {
       collection: "kmdb_new2",
       detail: "Y",
       releaseDts: value.dts ? dateFormat(value.dts) : "",
+      releaseDte: value.dte ? dateFormat(value.dte) : "",
       listCount: value.count ?? "",
-      movieId: value.movieId,
-      movieSeq: value.movieSeq,
+      movieId: value.movieId ?? "",
+      movieSeq: value.movieSeq ?? "",
+      genre: value.genre ?? "",
     },
   });
+  // console.log("fetch", response.config.params);
   return response.data;
 };
 
