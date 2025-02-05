@@ -21,7 +21,9 @@ export default function Nav() {
       </Home>
       <List>
         {nav.map((nav, idx) => (
-          <div key={idx}>{nav}</div>
+          <div key={idx} onClick={() => router.push(`/${nav.toLocaleLowerCase()}`)}>
+            {nav}
+          </div>
         ))}
       </List>
       <div>
