@@ -32,8 +32,8 @@
 
   - [x] 배우 최대 4명
 
-  - [ ] 개봉일 유무 확인
-  - [ ] still 유무 확인
+  - [x] 개봉일 유무 확인
+  - [x] still 유무 확인
 
 - Genre & Nation & Year
 

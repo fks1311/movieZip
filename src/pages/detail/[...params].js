@@ -23,12 +23,26 @@ export default function Detail({ kmdb }) {
           </div>
           <p id="info">
             {kmdb.repRlsDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3")}
-            <>&nbsp;</>
-            <>&nbsp;</>개봉<>&nbsp;</>
-            <>&nbsp;</>|<>&nbsp;</>
-            <>&nbsp;</>
-            {kmdb.runtime}분<>&nbsp;</>
-            <>&nbsp;</>|<>&nbsp;</>
+            {kmdb.repRlsDate === "" ? (
+              <></>
+            ) : (
+              <>
+                <>&nbsp;</>
+                <>&nbsp;</>개봉<>&nbsp;</>
+                <>&nbsp;</>|<>&nbsp;</>
+                <>&nbsp;</>
+              </>
+            )}
+            {kmdb.repRlsDate === "" ? (
+              <>
+                runtime : {kmdb.runtime}분<>&nbsp;</>
+              </>
+            ) : (
+              <>
+                {kmdb.runtime}분<>&nbsp;</>
+                <>&nbsp;</> | <>&nbsp;</>
+              </>
+            )}
             <>&nbsp;</>
             <span>{kmdb.rating}</span>
           </p>
@@ -49,19 +63,23 @@ export default function Detail({ kmdb }) {
         </Info>
       </Movie>
       <Plots>{addLineBreaks(kmdb.plots.plot[0].plotText)}</Plots>
-      <Stills>
-        <p>
-          <span>
-            스틸컷 <>&nbsp;</>
-          </span>
-          <span id="still-count">({kmdb.stlls.split("|").length})</span>
-        </p>
-        <div>
-          {kmdb.stlls.split("|").map((img, idx) => (
-            <Image src={img} height={500} width={500} key={idx} unoptimized={true} alt="stills" />
-          ))}
-        </div>
-      </Stills>
+      {kmdb.stlls === "" ? (
+        <></>
+      ) : (
+        <Stills>
+          <p>
+            <span>
+              스틸컷 <>&nbsp;</>
+            </span>
+            <span id="still-count">({kmdb.stlls.split("|").length})</span>
+          </p>
+          <div>
+            {kmdb.stlls.split("|").map((img, idx) => (
+              <Image src={img} height={500} width={500} key={idx} unoptimized={true} alt="stills" />
+            ))}
+          </div>
+        </Stills>
+      )}
     </Main>
   );
 }
@@ -111,11 +129,15 @@ const Info = styled.div`
         switch (sel) {
           case "전체관람가":
             return theme.all;
+          case "12세관람가":
           case "12세이상관람가":
             return theme._12;
+          case "15세관람가":
           case "15세이상관람가":
             return theme._15;
           case "청소년관람불가":
+            return theme._19;
+          case "18세관람가(청소년관람불가)":
             return theme._19;
         }
       }};

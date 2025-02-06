@@ -93,4 +93,5 @@ const Container = styled.div`
   font-size: 1.3rem;
   color: white;
   letter-spacing: 0.3rem;
+  max-width: 20vw;
 `;
