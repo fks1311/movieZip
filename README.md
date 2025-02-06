@@ -7,7 +7,7 @@
 - framer-motion
 - recoil
 
-## Work
+## Todo
 
 - Nav
 
@@ -31,6 +31,7 @@
 - detail
 
   - [x] 배우 최대 4명
+
   - [ ] 개봉일 유무 확인
 
 - Genre & Nation
