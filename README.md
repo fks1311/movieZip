@@ -33,17 +33,22 @@
   - [x] 배우 최대 4명
 
   - [ ] 개봉일 유무 확인
+  - [ ] still 유무 확인
 
-- Genre & Nation
+- Genre & Nation & Year
 
   - [ ] api 추가 호출
-  - [x] Filter Button 컴포넌트화
-  - [ ] 장르 button 상태 적용
+
   - [x] useQuery 활용
   - Filter
 
-    - [ ] poster의 유무에 따른 필터링
-    - [ ] 현 nation에 따른 필터링
+    - [x] Filter Button 컴포넌트화
+    - [ ] ALL => filter button 이전 상태 적용
+    - [x] ALL => nav button 변경 시 초기화 상태 적용
+    - [x] ALL => poster의 유무에 따른 필터링
+    - [x] Nation => 현 nation에 따른 필터링
+    - [x] Year => 연도 배열 생성
+    - [x] Year => 조건별 dts/dte
 
   - [ ] 개봉 최신순 정렬
   - [ ] 스크롤 포커스
