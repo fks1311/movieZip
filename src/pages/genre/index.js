@@ -14,8 +14,7 @@ export default function Genre() {
   const { isLoading, data: movie } = useQuery({
     queryKey: ["genre", cur.filter],
     queryFn: async () => {
-      const response = await fetchKMDBData({ dte: 1, genre: cur.filter === "전체" ? "" : cur.filter, count: 500 });
-      console.log(response.Data[0].Result);
+      const response = await fetchKMDBData({ genre: cur.filter === "전체" ? "" : cur.filter, count: 500 });
       return response.Data[0].Result;
     },
   });

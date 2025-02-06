@@ -24,9 +24,9 @@ export default function Nation() {
   };
 
   const { isLoading, data: movie } = useQuery({
-    queryKey: ["genre", cur.filter],
+    queryKey: ["nation", cur.filter],
     queryFn: async () => {
-      const response = await fetchKMDBData({ dte: 1, nation: nationFilter(cur.filter), count: 500 });
+      const response = await fetchKMDBData({ nation: nationFilter(cur.filter), count: 500 });
       const filterPoster = response.Data[0].Result.filter((remove) => remove.posters !== "");
       const filterKR = filterPoster.filter((kr) => kr.nation !== "대한민국");
       return cur.filter === "해외" ? filterKR : filterPoster;
