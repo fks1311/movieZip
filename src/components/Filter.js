@@ -1,28 +1,12 @@
 import styled from "styled-components";
 
-export default function Badge({ cur, setCur }) {
-  const genre = [
-    "전체",
-    "드라마",
-    "액션",
-    "코메디",
-    "로맨스",
-    "범죄",
-    "스릴러",
-    "공포",
-    "SF",
-    "판타지",
-    "애니메이션",
-    "다큐멘터리",
-    "뮤지컬",
-  ];
-
+export default function Filter({ filter, cur, setCur }) {
   return (
     <Frame>
-      {genre.map((g, i) => (
-        <Genre key={i} idx={i} cur={cur.idx} onClick={() => setCur({ idx: i, genre: g })}>
+      {filter.map((g, i) => (
+        <Button key={i} idx={i} cur={cur.idx} onClick={() => setCur({ idx: i, filter: g })}>
           {g}
-        </Genre>
+        </Button>
       ))}
     </Frame>
   );
@@ -36,7 +20,7 @@ const Frame = styled.div`
   font-family: Freesentation-9Black;
 `;
 
-const Genre = styled.p`
+const Button = styled.p`
   padding: 1rem;
   color: ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.grey)};
   border: 1px solid ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.grey)};

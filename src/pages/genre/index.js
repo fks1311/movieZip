@@ -1,22 +1,39 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
-import styled from "styled-components";
-import Badge from "./Badge";
 import Image from "next/image";
-import { fetchKMDBData } from "@/utiils/_api";
+import styled from "styled-components";
+import Filter from "@/components/Filter";
 import Spinner from "@/components/Spinner";
+import { fetchKMDBData } from "@/utiils/_api";
+import { useRecoilState } from "recoil";
+import { filterAtom } from "@/utiils/atom";
 
 export default function Genre() {
   const router = useRouter();
-  const [cur, setCur] = useState({ idx: 0, genre: "전체" });
+  const [cur, setCur] = useRecoilState(filterAtom);
   const { isLoading, data: movie } = useQuery({
-    queryKey: ["genre", cur.genre],
+    queryKey: ["genre", cur.filter],
     queryFn: async () => {
-      const response = await fetchKMDBData({ dte: 1, genre: cur.genre === "전체" ? "" : cur.genre, count: 500 });
+      const response = await fetchKMDBData({ dte: 1, genre: cur.filter === "전체" ? "" : cur.filter, count: 500 });
+      console.log(response.Data[0].Result);
       return response.Data[0].Result;
     },
   });
+
+  const genre = [
+    "전체",
+    "드라마",
+    "액션",
+    "코메디",
+    "로맨스",
+    "범죄",
+    "스릴러",
+    "공포",
+    "SF",
+    "판타지",
+    "애니메이션",
+    "뮤지컬",
+  ];
 
   const onClick = (movie) => {
     router.push(
@@ -30,7 +47,7 @@ export default function Genre() {
 
   return (
     <Layout>
-      <Badge cur={cur} setCur={setCur} />
+      <Filter filter={genre} cur={cur} setCur={setCur} />
       {isLoading ? (
         <Spinner />
       ) : (
@@ -80,9 +97,3 @@ const Container = styled.div`
   color: white;
   letter-spacing: 0.3rem;
 `;
-
-/**
- * 500개씩 api 요청
- * 장르 button 상태관리 적용
- * 개봉 최신순 정렬
- */

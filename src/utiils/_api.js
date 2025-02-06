@@ -1,5 +1,4 @@
 import { dateFormat } from "./date";
-
 const { default: axios } = require("axios");
 
 const fetchKoficData = async (type, targetDt) => {
@@ -14,13 +13,6 @@ const fetchKoficData = async (type, targetDt) => {
 };
 
 const fetchKMDBData = async (value) => {
-  // const baseURL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
-  // const params = { ServiceKey: process.env.NEXT_PUBLIC_KMDB_KEY, collection: "kmdb_new2", detail: "Y" };
-  // const queryString = new URLSearchParams(params).toString();
-  // const requrl = `${baseURL}?${queryString}`;
-  // const response = await fetch(requrl);
-  // const repo = await response.json();
-
   const baseURL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
   const response = await axios.get(`${baseURL}`, {
     params: {
@@ -33,9 +25,9 @@ const fetchKMDBData = async (value) => {
       movieId: value.movieId ?? "",
       movieSeq: value.movieSeq ?? "",
       genre: value.genre ?? "",
+      nation: value.nation ?? "",
     },
   });
-  // console.log("fetch", response.config.params);
   return response.data;
 };
 
