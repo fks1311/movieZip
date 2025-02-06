@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Filter from "@/components/Filter";
 import { useRecoilState } from "recoil";
-import { filterAtom } from "@/utiils/atom";
+import { filterAtom } from "@/utils/atom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchKMDBData } from "@/utiils/_api";
+import { fetchKMDBData } from "@/utils/_api";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import { useRouter } from "next/router";

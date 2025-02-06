@@ -4,9 +4,9 @@ import Image from "next/image";
 import styled from "styled-components";
 import Filter from "@/components/Filter";
 import Spinner from "@/components/Spinner";
-import { fetchKMDBData } from "@/utiils/_api";
+import { fetchKMDBData } from "@/utils/_api";
 import { useRecoilState } from "recoil";
-import { filterAtom } from "@/utiils/atom";
+import { filterAtom } from "@/utils/atom";
 
 export default function Genre() {
   const router = useRouter();

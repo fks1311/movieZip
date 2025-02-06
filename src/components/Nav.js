@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
 import { useResetRecoilState } from "recoil";
-import { filterAtom } from "@/utiils/atom";
+import { filterAtom } from "@/utils/atom";
 
 export default function Nav() {
   const nav = ["Genre", "Year", "Nation"];

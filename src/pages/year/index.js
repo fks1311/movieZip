@@ -1,8 +1,8 @@
 import Spinner from "@/components/Spinner";
 import Filter from "@/components/Filter";
 import { DTE, DTS } from "./duration";
-import { fetchKMDB2Data } from "@/utiils/_api";
-import { yearFilterAtom } from "@/utiils/atom";
+import { fetchKMDB2Data } from "@/utils/_api";
+import { yearFilterAtom } from "@/utils/atom";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";

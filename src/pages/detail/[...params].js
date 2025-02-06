@@ -1,4 +1,4 @@
-import { fetchKMDBData } from "@/utiils/_api";
+import { fetchKMDBData } from "@/utils/_api";
 import Image from "next/image";
 import styled from "styled-components";
 

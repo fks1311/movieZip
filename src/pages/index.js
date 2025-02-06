@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { line_break } from "@/utiils/lineBreak";
-import { fetchKMDBData, fetchKoficData } from "@/utiils/_api";
-import { dateFormat } from "@/utiils/date";
+import { line_break } from "@/utils/lineBreak";
+import { fetchKMDBData, fetchKoficData } from "@/utils/_api";
+import { dateFormat } from "@/utils/date";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";

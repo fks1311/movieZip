@@ -1,4 +1,4 @@
-import { dateFormat } from "@/utiils/date";
+import { dateFormat } from "@/utils/date";
 
 const getFullYear = new Date().getFullYear();
 
