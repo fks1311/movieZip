@@ -3,11 +3,20 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
+import { useResetRecoilState } from "recoil";
+import { filterAtom } from "@/utiils/atom";
 
 export default function Nav() {
   const nav = ["Genre", "Year", "Nation"];
   const router = useRouter();
   const [value, setValue] = useState("");
+  const resetFilter = useResetRecoilState(filterAtom);
+
+  const onClick = (nav) => {
+    router.push(`/${nav.toLowerCase()}`);
+    resetFilter();
+  };
+
   const handleKeydown = (e) => {};
 
   return (
@@ -15,13 +24,14 @@ export default function Nav() {
       <Home
         onClick={() => {
           router.push("/");
+          resetFilter();
         }}
       >
         MovieZip
       </Home>
       <List>
         {nav.map((nav, idx) => (
-          <div key={idx} onClick={() => router.push(`/${nav.toLocaleLowerCase()}`)}>
+          <div key={idx} onClick={() => onClick(nav)}>
             {nav}
           </div>
         ))}
