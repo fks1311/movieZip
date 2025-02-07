@@ -134,6 +134,7 @@ const MovieContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  padding: 0em 3em;
 `;
 
 const MovieFrame = styled.div`
