@@ -11,6 +11,8 @@
 
 - Nav
 
+  - [ ] sticky
+
   - [ ] searchBar
 
     - [ ] search api 생성
@@ -45,6 +47,7 @@
     - [x] Filter Button 컴포넌트화
     - [ ] ALL => filter button 이전 상태 적용
     - [x] ALL => nav button 변경 시 초기화 상태 적용
+    - [ ] ALL => sticky
     - [x] ALL => poster의 유무에 따른 필터링
     - [x] Nation => 현 nation에 따른 필터링
     - [x] Year => 연도 배열 생성

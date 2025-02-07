@@ -67,6 +67,7 @@ export default function Year() {
 
 const Layout = styled.div`
   padding: 5em 2em;
+  cursor: pointer;
 `;
 
 const Content = styled.div`

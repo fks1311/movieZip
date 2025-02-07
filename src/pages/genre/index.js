@@ -73,6 +73,7 @@ export default function Genre() {
 
 const Layout = styled.div`
   padding: 5em 2em;
+  cursor: pointer;
 `;
 const Frame = styled.div`
   display: flex;

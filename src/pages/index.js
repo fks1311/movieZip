@@ -163,6 +163,7 @@ const MovieList = styled(motion.div)`
   gap: 3rem;
   padding: 3rem;
   overflow-x: scroll;
+  cursor: pointer;
   img {
     width: 25vw;
     height: 50vh;

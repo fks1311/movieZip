@@ -51,6 +51,7 @@ export default function Nav() {
 const Layout = styled.nav`
   display: flex;
   font-size: 2rem;
+  cursor: pointer;
 `;
 const Home = styled.div`
   color: ${({ theme }) => theme.color};
