@@ -31,9 +31,9 @@ export default function Nav() {
       </Home>
       <List>
         {nav.map((nav, idx) => (
-          <div key={idx} onClick={() => onClick(nav)}>
+          <Button key={idx} $curPath={router.asPath} nav={`/${nav.toLowerCase()}`} onClick={() => onClick(nav)}>
             {nav}
-          </div>
+          </Button>
         ))}
       </List>
       <div>
@@ -62,10 +62,11 @@ const List = styled.div`
   justify-content: center;
   gap: 5rem;
   color: white;
-  div {
-    &:hover {
-      color: ${({ theme }) => theme.color};
-    }
+`;
+const Button = styled.div`
+  color: ${({ $curPath, nav, theme }) => $curPath === nav && theme.color};
+  &:hover {
+    color: ${({ theme }) => theme.color};
   }
 `;
 const SearchBar = styled(motion.input)`

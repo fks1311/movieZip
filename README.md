@@ -18,7 +18,7 @@
     - [ ] search api 생성
     - [ ] enter => search api
 
-  - [ ] 현재 선택된 Nav 활성화
+  - [x] 현재 선택된 Nav 활성화
 
 - Home
 
