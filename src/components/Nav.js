@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import { motion, useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
 import { useResetRecoilState } from "recoil";
@@ -9,8 +9,21 @@ import { filterAtom } from "@/utils/atom";
 export default function Nav() {
   const nav = ["Genre", "Year", "Nation"];
   const router = useRouter();
+  const [scope, animate] = useAnimate(); // scroll trigger
+  const { scrollY } = useScroll();
   const [value, setValue] = useState("");
   const resetFilter = useResetRecoilState(filterAtom);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    latest >= 1
+      ? animate(
+          scope.current,
+          { backgroundColor: "rgb(46, 55, 70, 0.7)" },
+          { ease: "linear" },
+          { backdropFilter: "blur(10px)" }
+        )
+      : animate(scope.current, { backgroundColor: "transparent" });
+  });
 
   const onClick = (nav) => {
     router.push(`/${nav.toLowerCase()}`);
@@ -20,7 +33,7 @@ export default function Nav() {
   const handleKeydown = (e) => {};
 
   return (
-    <Layout>
+    <Layout ref={scope}>
       <Home
         onClick={() => {
           router.push("/");
@@ -49,7 +62,11 @@ export default function Nav() {
 }
 
 const Layout = styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
+  padding: 3rem;
   font-size: 2rem;
   cursor: pointer;
 `;

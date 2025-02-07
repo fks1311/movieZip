@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import styled from "styled-components";
+import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
 
 export default function Year() {
   const router = useRouter();
@@ -30,6 +31,20 @@ export default function Year() {
     },
   });
 
+  const [scope, animate] = useAnimate(); // scroll trigger
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    latest >= 10
+      ? animate(scope.current, {
+          position: "absolute",
+          top: `calc(${latest}px + 300px)`,
+          right: "3rem",
+          color: "white",
+          opacity: "1",
+        })
+      : animate(scope.current, { opacity: "0" });
+  });
+
   const onClick = (movie) => {
     router.push(
       {
@@ -46,20 +61,25 @@ export default function Year() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Content>
-          {movie === undefined ? (
-            <>없음</>
-          ) : (
-            movie.map((data, idx) => {
-              return (
-                <Container key={idx} onClick={() => onClick(data)}>
-                  <Image src={data.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
-                  <p>{data.title}</p>
-                </Container>
-              );
-            })
-          )}
-        </Content>
+        <>
+          <Content>
+            {movie === undefined ? (
+              <>없음</>
+            ) : (
+              movie.map((data, idx) => {
+                return (
+                  <Container key={idx} onClick={() => onClick(data)}>
+                    <Image src={data.posters.split("|")[0]} height={700} width={700} unoptimized={true} alt="poster" />
+                    <p>{data.title}</p>
+                  </Container>
+                );
+              })
+            )}
+          </Content>
+          <FloatingFilter ref={scope} top={scrollY.current}>
+            {cur.filter}
+          </FloatingFilter>
+        </>
       )}
     </Layout>
   );
@@ -92,4 +112,7 @@ const Container = styled.div`
   color: white;
   letter-spacing: 0.3rem;
   max-width: 20vw;
+`;
+const FloatingFilter = styled.div`
+  font-size: 1.5rem;
 `;
