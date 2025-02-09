@@ -80,8 +80,8 @@ export async function getStaticProps() {
   const weeklyDate = dateFormat(7);
 
   const [daily, weekly, kmdb] = await Promise.all([
-    fetchKoficData("searchDailyBoxOfficeList", dailyDate),
-    fetchKoficData("searchWeeklyBoxOfficeList", weeklyDate),
+    fetchKoficData({ type: "boxoffice/searchDailyBoxOfficeList", targetDt: dailyDate }),
+    fetchKoficData({ type: "boxoffice/searchWeeklyBoxOfficeList", targetDt: weeklyDate }),
     fetchKMDBData({ dts: 90, count: 300 }),
   ]);
 

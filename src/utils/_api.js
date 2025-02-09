@@ -1,12 +1,13 @@
 import { dateFormat } from "./date";
 const { default: axios } = require("axios");
 
-const fetchKoficData = async (type, targetDt) => {
-  const baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice";
-  const response = await axios.get(`${baseUrl}/${type}.json`, {
+const fetchKoficData = async (value) => {
+  const baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/";
+  const response = await axios.get(`${baseUrl}/${value.type}.json`, {
     params: {
       key: process.env.NEXT_PUBLIC_KOFIC_KEY,
-      targetDt,
+      targetDt: value.targetDt ?? "",
+      movieNm: value.movieNm ?? "",
     },
   });
   return response.data;
@@ -26,6 +27,7 @@ const fetchKMDBData = async (value) => {
       movieSeq: value.movieSeq ?? "",
       genre: value.genre ?? "",
       nation: value.nation ?? "",
+      query: value.query ?? "",
     },
   });
   return response.data;
@@ -43,6 +45,7 @@ const fetchKMDB2Data = async (value) => {
       listCount: value.count ?? "",
     },
   });
+  console.log(response);
   return response.data;
 };
 
