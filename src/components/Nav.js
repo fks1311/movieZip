@@ -1,17 +1,15 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
-import { motion, useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
-import { AiOutlineSearch } from "react-icons/ai";
+import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
 import styled from "styled-components";
 import { useResetRecoilState } from "recoil";
 import { filterAtom } from "@/utils/atom";
+import SearchBar from "./SearchBar";
 
 export default function Nav() {
   const nav = ["Genre", "Year", "Nation"];
   const router = useRouter();
   const [scope, animate] = useAnimate(); // scroll trigger
   const { scrollY } = useScroll();
-  const [value, setValue] = useState("");
   const resetFilter = useResetRecoilState(filterAtom);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -29,8 +27,6 @@ export default function Nav() {
     router.push(`/${nav.toLowerCase()}`);
     resetFilter();
   };
-
-  const handleKeydown = (e) => {};
 
   return (
     <Layout ref={scope}>
@@ -50,12 +46,7 @@ export default function Nav() {
         ))}
       </List>
       <div>
-        <AiOutlineSearch color="white" />
-        <SearchBar
-          placeholder="검색어를 입력하세요"
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={handleKeydown}
-        />
+        <SearchBar />
       </div>
     </Layout>
   );
@@ -84,20 +75,5 @@ const Button = styled.div`
   color: ${({ $curPath, nav, theme }) => $curPath === nav && theme.color};
   &:hover {
     color: ${({ theme }) => theme.color};
-  }
-`;
-const SearchBar = styled(motion.input)`
-  position: absolute;
-  right: 3%;
-  border: none;
-  outline: none;
-  background: none;
-  color: white;
-  min-width: 230px;
-  padding-bottom: 5px;
-  margin-right: 1rem;
-  border-bottom: ${({ theme }) => `1px solid ${theme.grey}`};
-  &:focus {
-    border-bottom: 1px solid ${({ theme }) => theme.color};
   }
 `;
