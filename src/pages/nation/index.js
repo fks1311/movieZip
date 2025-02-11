@@ -28,8 +28,12 @@ export default function Nation() {
     queryKey: ["nation", cur.filter],
     queryFn: async () => {
       const response = await fetchKMDBData({ nation: nationFilter(cur.filter), count: 500 });
-      const filterPoster = response.Data[0].Result.filter((remove) => remove.posters !== "");
-      const filterKR = filterPoster.filter((kr) => kr.nation !== "대한민국");
+      const filterPoster = response.Data[0].Result.filter((remove) => remove.posters !== "").sort(
+        (a, b) => b.repRlsDate - a.repRlsDate
+      );
+      const filterKR = filterPoster
+        .filter((kr) => kr.nation !== "대한민국")
+        .sort((a, b) => b.repRlsDate - a.repRlsDate);
       return cur.filter === "해외" ? filterKR : filterPoster;
     },
   });

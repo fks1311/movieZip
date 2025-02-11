@@ -27,7 +27,8 @@ export default function Year() {
         count: 500,
       });
       const filterPoster = response.Data[0].Result.filter((remove) => remove.posters !== "");
-      return filterPoster;
+      const sort = filterPoster.sort((a, b) => b.repRlsDate - a.repRlsDate);
+      return sort;
     },
   });
 

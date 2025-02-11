@@ -16,7 +16,8 @@ export default function Genre() {
     queryKey: ["genre", cur.filter],
     queryFn: async () => {
       const response = await fetchKMDBData({ genre: cur.filter === "전체" ? "" : cur.filter, count: 500 });
-      return response.Data[0].Result;
+      const sort = response.Data[0].Result.sort((a, b) => b.repRlsDate - a.repRlsDate);
+      return sort;
     },
   });
 
