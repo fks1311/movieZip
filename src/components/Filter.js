@@ -22,7 +22,7 @@ const Frame = styled.div`
 
 const Button = styled.p`
   padding: 1rem;
-  color: ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.grey)};
-  border: 1px solid ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.grey)};
+  color: ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.color.grey)};
+  border: 1px solid ${({ theme, idx, cur }) => (idx === cur ? "white" : theme.color.grey)};
   border-radius: 10px;
 `;

@@ -51,10 +51,8 @@
     - [x] Year => 연도 배열 생성
     - [x] Year => 조건별 dts/dte
 
-  - [ ] 개봉 최신순 정렬
+  - [x] 개봉 최신순 정렬
   - [ ] 스크롤 포커스
   - [x] loading spinner
-
-- Cursor
 
 - 반응형 작업

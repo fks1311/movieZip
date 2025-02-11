@@ -62,7 +62,7 @@ const Layout = styled.nav`
   cursor: pointer;
 `;
 const Home = styled.div`
-  color: ${({ theme }) => theme.color};
+  color: ${({ theme }) => theme.color.color};
 `;
 const List = styled.div`
   width: 100%;
@@ -72,8 +72,8 @@ const List = styled.div`
   color: white;
 `;
 const Button = styled.div`
-  color: ${({ $curPath, nav, theme }) => $curPath === nav && theme.color};
+  color: ${({ $curPath, nav, theme }) => $curPath === nav && theme.color.color};
   &:hover {
-    color: ${({ theme }) => theme.color};
+    color: ${({ theme }) => theme.color.color};
   }
 `;

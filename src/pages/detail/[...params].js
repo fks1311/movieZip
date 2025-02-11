@@ -128,17 +128,17 @@ const Info = styled.div`
       color: ${({ sel, theme }) => {
         switch (sel) {
           case "전체관람가":
-            return theme.all;
+            return theme.color.all;
           case "12세관람가":
           case "12세이상관람가":
-            return theme._12;
+            return theme.color._12;
           case "15세관람가":
           case "15세이상관람가":
-            return theme._15;
+            return theme.color._15;
           case "청소년관람불가":
-            return theme._19;
+            return theme.color._19;
           case "18세관람가(청소년관람불가)":
-            return theme._19;
+            return theme.color._19;
         }
       }};
     }
