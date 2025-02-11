@@ -17,4 +17,18 @@ const dateFormat = (period) => {
   return `${YYYY}${Min10(MM)}${Min10(DD)}`;
 };
 
-export { dateFormat };
+const NextDateFormat = (date, period) => {
+  const year = date.substring(0, 4);
+  const month = date.substring(4, 6);
+  const day = date.substring(6, 8);
+  let today = new Date(year, month, day);
+  const todayNext = new Date(today.setDate(today.getDate() + period));
+
+  const YYYY = todayNext.getFullYear();
+  const MM = todayNext.getMonth() + 1;
+  const DD = todayNext.getDate();
+
+  return `${YYYY}${Min10(MM)}${Min10(DD)}`;
+};
+
+export { dateFormat, NextDateFormat };

@@ -45,7 +45,6 @@ const fetchKMDB2Data = async (value) => {
       listCount: value.count ?? "",
     },
   });
-  console.log(response);
   return response.data;
 };
 

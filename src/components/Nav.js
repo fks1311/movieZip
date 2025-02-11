@@ -45,9 +45,9 @@ export default function Nav() {
           </Button>
         ))}
       </List>
-      <div>
+      {/* <div>
         <SearchBar />
-      </div>
+      </div> */}
     </Layout>
   );
 }

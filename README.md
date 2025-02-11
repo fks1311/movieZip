@@ -15,11 +15,6 @@
 
   - [x] sticky
 
-  - [ ] searchBar
-
-    - [ ] search api 생성
-    - [ ] enter => search api
-
   - [x] 현재 선택된 Nav 활성화
 
 - Home
@@ -59,3 +54,7 @@
   - [ ] 개봉 최신순 정렬
   - [ ] 스크롤 포커스
   - [x] loading spinner
+
+- Cursor
+
+- 반응형 작업
