@@ -5,9 +5,11 @@ import { dateFormat } from "@/utils/date";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";
+import useWindowsize from "@/utils/useWindowsize";
 
 export default function Home({ dailyFilter, weeklyFilter }) {
   const router = useRouter();
+  const width = useWindowsize();
   const daily = dailyFilter.sort((a, b) => a.rank - b.rank);
   const weekly = weeklyFilter.sort((a, b) => a.rank - b.rank);
 
@@ -28,8 +30,8 @@ export default function Home({ dailyFilter, weeklyFilter }) {
         <h1>BOXOFFICE</h1>
       </Title>
       <MovieContainer>
-        <MovieFrame>
-          <MovieType>{line_break("일별 박스오피스")}</MovieType>
+        <MovieFrame className="frame">
+          <MovieType>{width >= 1024 ? line_break("일별 박스오피스") : "일별 박스오피스"}</MovieType>
           <MovieList>
             {daily.map((movie, idx) => (
               <Movie key={idx} onClick={() => onClick(movie)}>
@@ -49,7 +51,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
         </MovieFrame>
         <MovieFrame>
           <div className="weekyType">
-            <MovieType>{line_break("주말 박스오피스")}</MovieType>
+            <MovieType>{width >= 1024 ? line_break("주말 박스오피스") : "주말 박스오피스"}</MovieType>
             {/* <p>{weeklyBoxOffice.showRange}</p> */}
             <p>* 지난 주 기준</p>
           </div>
@@ -128,6 +130,15 @@ const Title = styled.div`
     font-size: 10rem;
     letter-spacing: 0.5rem;
   }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    h1 {
+      font-size: 7rem;
+    }
+  }
 `;
 
 const MovieContainer = styled.section`
@@ -151,6 +162,14 @@ const MovieFrame = styled.div`
       letter-spacing: 0.2rem;
     }
   }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    flex-direction: column;
+    padding: 0px 3rem;
+  }
 `;
 const MovieType = styled.div`
   font-size: 2rem;
@@ -166,10 +185,17 @@ const MovieList = styled(motion.div)`
   overflow-x: scroll;
   cursor: pointer;
   img {
-    width: 25vw;
+    width: 23vw;
     height: 50vh;
     object-fit: fill;
     border-radius: 10px;
+  }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    width: 100%;
   }
 `;
 const Movie = styled.div`

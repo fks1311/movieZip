@@ -67,7 +67,7 @@ const Home = styled.div`
 const List = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 5rem;
   color: white;
 `;
