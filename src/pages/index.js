@@ -30,7 +30,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
         <h1>BOXOFFICE</h1>
       </Title>
       <MovieContainer>
-        <MovieFrame className="frame">
+        <MovieFrame>
           <MovieType>{width >= 1024 ? line_break("일별 박스오피스") : "일별 박스오피스"}</MovieType>
           <MovieList>
             {daily.map((movie, idx) => (
@@ -196,6 +196,9 @@ const MovieList = styled(motion.div)`
       },
     }) => middle} {
     width: 100%;
+    img {
+      width: 35vw;
+    }
   }
 `;
 const Movie = styled.div`
@@ -233,6 +236,17 @@ const MovieItem = styled.div`
             return theme.color._19;
         }
       }};
+    }
+  }
+  @media ${({
+      theme: {
+        media: { small },
+      },
+    }) => small} {
+    .info {
+      .name {
+        font-size: 1.2rem;
+      }
     }
   }
 `;

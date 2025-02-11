@@ -70,6 +70,13 @@ const List = styled.div`
   justify-content: space-around;
   gap: 5rem;
   color: white;
+  @media ${({
+      theme: {
+        media: { small },
+      },
+    }) => small} {
+    justify-content: center;
+  }
 `;
 const Button = styled.div`
   color: ${({ $curPath, nav, theme }) => $curPath === nav && theme.color.color};
