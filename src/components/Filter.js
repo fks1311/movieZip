@@ -26,7 +26,9 @@ const Frame = styled.div`
       },
     }) => middle} {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    // grid-template-columns: repeat(6, 1fr);
+    // grid-template-columns: repeat(6, minmax(100px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(20%, auto));
     text-align: center;
   }
 `;
