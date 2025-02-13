@@ -15,9 +15,20 @@ export default function Filter({ filter, cur, setCur }) {
 const Frame = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+
   gap: 1rem;
   font-size: 1.5rem;
   font-family: Freesentation-9Black;
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+  }
 `;
 
 const Button = styled.p`

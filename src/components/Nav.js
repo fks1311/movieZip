@@ -72,6 +72,13 @@ const List = styled.div`
   color: white;
   @media ${({
       theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    justify-content: space-evenly;
+  }
+  @media ${({
+      theme: {
         media: { small },
       },
     }) => small} {
