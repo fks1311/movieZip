@@ -15,6 +15,10 @@ export const Frame = styled.div`
     height: 45vh;
     width: 20vw;
     border-radius: 10px;
+    &:hover {
+      transform: scale(1.1);
+      transition: 0.8s;
+    }
   }
   @media ${({
       theme: {

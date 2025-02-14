@@ -1,6 +1,6 @@
-import { fetchKMDBData } from "@/utils/_api";
 import Image from "next/image";
 import styled from "styled-components";
+import { fetchKMDBData } from "@/utils/_api";
 
 export default function Detail({ kmdb }) {
   function addLineBreaks(text) {

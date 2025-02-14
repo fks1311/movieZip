@@ -1,10 +1,25 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 export default function Filter({ filter, cur, setCur }) {
+  useEffect(() => {
+    const storedFilter = window.sessionStorage.getItem("filter");
+    if (storedFilter) {
+      const getFilter = JSON.parse(storedFilter);
+      setCur(getFilter);
+    }
+  }, []);
+
+  const onClick = (i, g) => {
+    window.sessionStorage.setItem("filter", JSON.stringify({ idx: i, filter: g }));
+    const getFilter = JSON.parse(window.sessionStorage.getItem("filter"));
+    setCur(getFilter);
+  };
+
   return (
     <Frame>
       {filter.map((g, i) => (
-        <Button key={i} idx={i} cur={cur.idx} onClick={() => setCur({ idx: i, filter: g })}>
+        <Button key={i} idx={i} cur={cur.idx} onClick={() => onClick(i, g)}>
           {g}
         </Button>
       ))}

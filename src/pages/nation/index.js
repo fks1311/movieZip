@@ -1,11 +1,11 @@
 import Filter from "@/components/Filter";
-import { useRecoilState } from "recoil";
-import { filterAtom } from "@/utils/atom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchKMDBData } from "@/utils/_api";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { filterAtom } from "@/utils/atom";
+import { fetchKMDBData } from "@/utils/_api";
+import { useQuery } from "@tanstack/react-query";
 import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
 import { Container, FloatingFilter, Frame, Layout } from "@/styles/common";
 

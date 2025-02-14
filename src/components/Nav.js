@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
 import styled from "styled-components";
-import { useResetRecoilState } from "recoil";
-import { filterAtom } from "@/utils/atom";
 import SearchBar from "./SearchBar";
 
 export default function Nav() {
@@ -10,7 +8,6 @@ export default function Nav() {
   const router = useRouter();
   const [scope, animate] = useAnimate(); // scroll trigger
   const { scrollY } = useScroll();
-  const resetFilter = useResetRecoilState(filterAtom);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     latest >= 1
@@ -25,7 +22,7 @@ export default function Nav() {
 
   const onClick = (nav) => {
     router.push(`/${nav.toLowerCase()}`);
-    resetFilter();
+    window.sessionStorage.setItem("filter", JSON.stringify({ idx: 0, filter: "전체" }));
   };
 
   return (
@@ -33,7 +30,7 @@ export default function Nav() {
       <Home
         onClick={() => {
           router.push("/");
-          resetFilter();
+          window.sessionStorage.setItem("filter", JSON.stringify({ idx: 0, filter: "전체" }));
         }}
       >
         MovieZip
