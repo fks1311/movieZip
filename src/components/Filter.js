@@ -16,7 +16,6 @@ const Frame = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
   gap: 1rem;
   font-size: 1.5rem;
   font-family: Freesentation-9Black;
@@ -26,8 +25,6 @@ const Frame = styled.div`
       },
     }) => middle} {
     display: grid;
-    // grid-template-columns: repeat(6, 1fr);
-    // grid-template-columns: repeat(6, minmax(100px, auto));
     grid-template-columns: repeat(auto-fit, minmax(20%, auto));
     text-align: center;
   }
