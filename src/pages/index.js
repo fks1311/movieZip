@@ -139,6 +139,15 @@ const Title = styled.div`
       font-size: 7rem;
     }
   }
+  @media ${({
+      theme: {
+        media: { small },
+      },
+    }) => small} {
+    h1 {
+      font-size: 5rem;
+    }
+  }
 `;
 
 const MovieContainer = styled.section`

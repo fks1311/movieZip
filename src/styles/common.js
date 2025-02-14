@@ -58,6 +58,20 @@ export const Container = styled.div`
   color: white;
   letter-spacing: 0.3rem;
   max-width: 20vw;
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    max-width: 25vw;
+  }
+  @media ${({
+      theme: {
+        media: { small },
+      },
+    }) => small} {
+    max-width: 40vw;
+  }
 `;
 
 export const FloatingFilter = styled.div`
