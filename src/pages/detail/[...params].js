@@ -107,6 +107,19 @@ const Movie = styled.div`
     width: 20vw;
     border-radius: 10px;
   }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    img {
+      height: 50vh;
+      width: 60vw;
+    }
+  }
 `;
 const Info = styled.div`
   display: flex;
@@ -116,10 +129,12 @@ const Info = styled.div`
   font-family: Freesentation-9Black;
   #title {
     font-size: 5rem;
+    line-height: 6rem;
     margin-bottom: 1rem;
   }
   #title-eng {
     font-size: 2rem;
+    line-height: 2.5rem;
     opacity: 0.8;
   }
   #info {
@@ -148,7 +163,25 @@ const Info = styled.div`
     flex-direction: column;
     gap: 1rem;
     font-size: 1.3rem;
+    line-height: 2rem;
     letter-spacing: 0.2rem;
+  }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    width: 100%;
+    #title {
+      font-size: 3rem;
+      line-height: 4rem;
+    }
+    #title-eng {
+      font-size: 1.5rem;
+    }
+    #info {
+      line-height: 2.3rem;
+    }
   }
 `;
 
@@ -184,5 +217,31 @@ const Stills = styled.div`
     height: 30vh;
     width: 20vw;
     border-radius: 10px;
+  }
+  @media ${({
+      theme: {
+        media: { middle },
+      },
+    }) => middle} {
+    div {
+      grid-template-columns: repeat(2, minmax(53%, auto));
+      justify-items: center;
+    }
+    img {
+      width: 30vw;
+    }
+  }
+  @media ${({
+      theme: {
+        media: { small },
+      },
+    }) => small} {
+    div {
+      grid-template-columns: repeat(1, minmax(100%, auto));
+      justify-items: center;
+    }
+    img {
+      width: 55vw;
+    }
   }
 `;
