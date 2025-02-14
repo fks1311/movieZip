@@ -7,8 +7,8 @@ import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import styled from "styled-components";
 import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
+import { Container, FloatingFilter, Frame, Layout } from "@/styles/common";
 
 export default function Year() {
   const router = useRouter();
@@ -63,7 +63,7 @@ export default function Year() {
         <Spinner />
       ) : (
         <>
-          <Content>
+          <Frame>
             {movie === undefined ? (
               <>없음</>
             ) : (
@@ -76,7 +76,7 @@ export default function Year() {
                 );
               })
             )}
-          </Content>
+          </Frame>
           <FloatingFilter ref={scope} top={scrollY.current}>
             {cur.filter}
           </FloatingFilter>
@@ -85,35 +85,3 @@ export default function Year() {
     </Layout>
   );
 }
-
-const Layout = styled.div`
-  padding: 5em 2em;
-  cursor: pointer;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  padding-top: 3rem;
-  img {
-    height: 45vh;
-    width: 20vw;
-    border-radius: 10px;
-  }
-`;
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  font-family: HakgyoansimWoojuR;
-  font-size: 1.3rem;
-  color: white;
-  letter-spacing: 0.3rem;
-  max-width: 20vw;
-`;
-const FloatingFilter = styled.div`
-  font-size: 1.5rem;
-`;
