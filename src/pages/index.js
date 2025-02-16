@@ -52,7 +52,6 @@ export default function Home({ dailyFilter, weeklyFilter }) {
         <MovieFrame>
           <div className="weekyType">
             <MovieType>{width >= 1024 ? line_break("주말 박스오피스") : "주말 박스오피스"}</MovieType>
-            {/* <p>{weeklyBoxOffice.showRange}</p> */}
             <p>* 지난 주 기준</p>
           </div>
           <MovieList>
