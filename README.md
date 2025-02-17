@@ -1,5 +1,7 @@
 ## Movie Zip
 
+한국영상자료원과 영화진흥위원회 오픈 API를 통한 영화 정보 제공 사이트
+
 ## use
 
 - Next.js => page router 기반
@@ -36,8 +38,6 @@
 
 - Genre & Nation & Year
 
-  - [ ] api 추가 호출
-
   - [x] useQuery 활용
   - Filter
 
@@ -51,7 +51,6 @@
     - [x] Year => 조건별 dts/dte
 
   - [x] 개봉 최신순 정렬
-  - [ ] 스크롤 포커스
   - [x] loading spinner
 
 - [x] 반응형 작업
