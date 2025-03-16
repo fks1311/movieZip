@@ -10,6 +10,6 @@ const compat = new FlatCompat({
 });
 
 /** @type {import('eslint').Linter.Config[]} */
-const configs = [...compat.extends("next/core-web-vitals"), ...compat.extends("next/typescript")];
+const configs = [...compat.extends("next/core-web-vitals")];
 
 export default configs;
