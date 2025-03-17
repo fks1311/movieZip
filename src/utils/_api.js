@@ -2,7 +2,7 @@ import { dateFormat } from "./date";
 const { default: axios } = require("axios");
 
 const fetchKoficData = async (value) => {
-  const baseUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/";
+  const baseUrl = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/";
   const response = await axios.get(`${baseUrl}/${value.type}.json`, {
     params: {
       key: process.env.NEXT_PUBLIC_KOFIC_KEY,
@@ -13,7 +13,7 @@ const fetchKoficData = async (value) => {
   return response.data;
 };
 
-export const kmdb_baseURL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
+export const kmdb_baseURL = "https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
 const fetchKMDBData = async (value) => {
   const response = await axios.get(`${kmdb_baseURL}`, {
     params: {
