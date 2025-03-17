@@ -42,7 +42,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
-                    <span id="rating">{movie.rating}</span>
+                    <span id="rating">{movie?.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
@@ -64,7 +64,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
-                    <span id="rating">{movie.rating}</span>
+                    <span id="rating">{movie?.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
