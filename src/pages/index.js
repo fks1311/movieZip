@@ -42,7 +42,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
-                    {/* <span id="rating">{movie?.rating}</span> */}
+                    <span id="rating">{movie.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
@@ -64,7 +64,7 @@ export default function Home({ dailyFilter, weeklyFilter }) {
                     <span className="name">{movie.movieNm}</span>
                     <p>오늘 관객수 : {movie.audiCnt}</p>
                     <p>누적 관객수 : {movie.audiAcc}</p>
-                    {/* <span id="rating">{movie?.rating}</span> */}
+                    <span id="rating">{movie.rating}</span>
                   </div>
                 </MovieItem>
               </Movie>
@@ -232,25 +232,24 @@ const MovieItem = styled.div`
       line-height: 2rem;
     }
     #rating {
-      color: ${({ sel, theme }) => {
-        switch (sel) {
-          case "전체관람가":
-            return theme.color.all;
-          case "12세이상관람가":
-            return theme.color._12;
-          case "15세이상관람가":
-            return theme.color._15;
-          case "청소년관람불가":
-            return theme.color._19;
-        }
-      }};
-    }
-  }
+      // color: ${({ sel, theme }) => {
+        //   switch (sel) {
+        //     case "전체관람가":
+        //       return theme.color.all;
+        //     case "12세이상관람가":
+        //       return theme.color._12;
+        //     case "15세이상관람가":
+        //       return theme.color._15;
+        //     case "청소년관람불가":
+        //       return theme.color._19;
+        //   }
+        // }};
+      }}
   @media ${({
-      theme: {
-        media: { small },
-      },
-    }) => small} {
+    theme: {
+      media: { small },
+    },
+  }) => small} {
     .info {
       .name {
         font-size: 1.2rem;
