@@ -1,6 +1,6 @@
 import Spinner from "@/components/Spinner";
 import Filter from "@/components/Filter";
-import { DTE, DTS } from "./duration";
+import { DTE, DTS } from "../../utils/duration";
 import { fetchKMDB2Data } from "@/utils/_api";
 import { yearFilterAtom } from "@/utils/atom";
 import { useRecoilState } from "recoil";
