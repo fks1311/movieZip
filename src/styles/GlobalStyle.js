@@ -1,6 +1,5 @@
 const { createGlobalStyle } = require("styled-components");
 const { default: reset } = require("styled-reset");
-import "@/styles/font.css";
 
 const GlobalStyle = createGlobalStyle`
 html {

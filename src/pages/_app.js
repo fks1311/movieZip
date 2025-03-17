@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
+import "@/styles/font.css";
 
 export default function App({ Component, pageProps }) {
   const [isClient, setIsClient] = useState(false);
