@@ -77,53 +77,44 @@ export default function Home({ dailyFilter, weeklyFilter }) {
 }
 
 export async function getStaticProps() {
-  try {
-    const dailyDate = dateFormat(1);
-    const weeklyDate = dateFormat(7);
+  const dailyDate = dateFormat(1);
+  const weeklyDate = dateFormat(7);
 
-    const [daily, weekly, kmdb] = await Promise.all([
-      fetchKoficData({ type: "boxoffice/searchDailyBoxOfficeList", targetDt: dailyDate }),
-      fetchKoficData({ type: "boxoffice/searchWeeklyBoxOfficeList", targetDt: weeklyDate }),
-      fetchKMDBData({ dts: 90, count: 300 }),
-    ]);
+  // API 호출을 동시에 실행
+  const [daily, weekly, kmdb] = await Promise.all([
+    fetchKoficData({ type: "boxoffice/searchDailyBoxOfficeList", targetDt: dailyDate }),
+    fetchKoficData({ type: "boxoffice/searchWeeklyBoxOfficeList", targetDt: weeklyDate }),
+    fetchKMDBData({ dts: 90, count: 300 }),
+  ]);
 
-    const dailyBoxOffice = daily?.boxOfficeResult?.dailyBoxOfficeList || [];
-    const weeklyBoxOffice = weekly?.boxOfficeResult?.weeklyBoxOfficeList || [];
-    const kmdbData = kmdb?.Data?.[0]?.Result || [];
+  // 데이터가 유효한지 체크하고, 기본값 설정
+  const dailyBoxOffice = daily?.boxOfficeResult?.dailyBoxOfficeList || [];
+  const weeklyBoxOffice = weekly?.boxOfficeResult?.weeklyBoxOfficeList || [];
+  const kmdbData = kmdb?.Data?.[0]?.Result || [];
 
-    const dailyFilter = kmdbData
-      .filter((kmdbCode) => dailyBoxOffice.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, "")))
-      .map((item1) => ({
-        ...item1,
-        ...dailyBoxOffice.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
-      }));
+  // dailyFilter 및 weeklyFilter 생성 시, 데이터 유효성 체크
+  const dailyFilter = kmdbData
+    .filter((kmdbCode) => dailyBoxOffice.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, "")))
+    .map((item1) => ({
+      ...item1,
+      ...dailyBoxOffice.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
+    }));
 
-    const weeklyFilter = kmdbData
-      .filter((kmdbCode) => weeklyBoxOffice.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, "")))
-      .map((item1) => ({
-        ...item1,
-        ...weeklyBoxOffice.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
-      }));
+  const weeklyFilter = kmdbData
+    .filter((kmdbCode) => weeklyBoxOffice.find((nm) => nm.movieNm === kmdbCode.title.replace(/^ /, "")))
+    .map((item1) => ({
+      ...item1,
+      ...weeklyBoxOffice.find((nm) => nm.movieNm === item1.title.replace(/^ /, "")),
+    }));
 
-    return {
-      props: {
-        dailyBoxOffice: daily.boxOfficeResult || {},
-        weeklyBoxOffice: weekly.boxOfficeResult || {},
-        dailyFilter,
-        weeklyFilter,
-      },
-    };
-  } catch (error) {
-    console.error("Error during getStaticProps:", error);
-    return {
-      props: {
-        dailyBoxOffice: {},
-        weeklyBoxOffice: {},
-        dailyFilter: [],
-        weeklyFilter: [],
-      },
-    };
-  }
+  return {
+    props: {
+      dailyBoxOffice: daily.boxOfficeResult || {},
+      weeklyBoxOffice: weekly.boxOfficeResult || {},
+      dailyFilter,
+      weeklyFilter,
+    },
+  };
 }
 
 const Main = styled.main`
