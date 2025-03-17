@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { motion } from "framer-motion";
 import { line_break } from "@/utils/lineBreak";
 import { fetchKMDBData, fetchKoficData } from "@/utils/_api";
@@ -232,24 +234,25 @@ const MovieItem = styled.div`
       line-height: 2rem;
     }
     #rating {
-      // color: ${({ sel, theme }) => {
-        //   switch (sel) {
-        //     case "전체관람가":
-        //       return theme.color.all;
-        //     case "12세이상관람가":
-        //       return theme.color._12;
-        //     case "15세이상관람가":
-        //       return theme.color._15;
-        //     case "청소년관람불가":
-        //       return theme.color._19;
-        //   }
-        // }};
-      }}
+      color: ${({ sel, theme }) => {
+        switch (sel) {
+          case "전체관람가":
+            return theme.color.all;
+          case "12세이상관람가":
+            return theme.color._12;
+          case "15세이상관람가":
+            return theme.color._15;
+          case "청소년관람불가":
+            return theme.color._19;
+        }
+      }};
+    }
+  }
   @media ${({
-    theme: {
-      media: { small },
-    },
-  }) => small} {
+      theme: {
+        media: { small },
+      },
+    }) => small} {
     .info {
       .name {
         font-size: 1.2rem;
