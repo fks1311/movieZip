@@ -12,10 +12,6 @@ export default function Home({ dailyFilter, weeklyFilter }) {
   const width = useWindowsize();
   const daily = dailyFilter.sort((a, b) => a.rank - b.rank);
   const weekly = weeklyFilter.sort((a, b) => a.rank - b.rank);
-  console.group();
-  console.log("daily", daily);
-  console.log("weekly", weekly);
-  console.groupEnd();
 
   const onClick = (movie) => {
     router.push(
@@ -116,6 +112,7 @@ export async function getStaticProps() {
       dailyFilter,
       weeklyFilter,
     },
+    revalidate: 86400, // 24시간(1일)마다 페이지 갱신
   };
 }
 
