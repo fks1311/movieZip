@@ -8,6 +8,7 @@ export default function Nav() {
   const router = useRouter();
   const [scope, animate] = useAnimate(); // scroll trigger
   const { scrollY } = useScroll();
+  const getFullYear = new Date().getFullYear();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     latest >= 1
@@ -21,8 +22,12 @@ export default function Nav() {
   });
 
   const onClick = (nav) => {
+    console.log(nav);
     router.push(`/${nav.toLowerCase()}`);
-    window.sessionStorage.setItem("filter", JSON.stringify({ idx: 0, filter: "전체" }));
+    window.sessionStorage.setItem(
+      "filter",
+      JSON.stringify({ idx: 0, filter: nav === "Year" ? `${getFullYear}년` : "전체" })
+    );
   };
 
   return (
