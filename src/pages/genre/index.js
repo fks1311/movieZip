@@ -7,7 +7,9 @@ import { useRecoilState } from "recoil";
 import { filterAtom } from "@/utils/atom";
 import { fetchKMDBData } from "@/utils/_api";
 import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
-import { Container, FloatingFilter, Frame, Layout } from "@/styles/common";
+import { Container, Frame, Layout } from "@/styles/common";
+import { FloatingFilter } from "@/components/FloatingFilter";
+import NotFound from "@/components/NotFound";
 
 export default function Genre() {
   const router = useRouter();
@@ -68,7 +70,7 @@ export default function Genre() {
         <>
           <Frame>
             {movie === undefined ? (
-              <>없음</>
+              <NotFound />
             ) : (
               movie
                 .filter((data) => data.posters !== "")
@@ -88,9 +90,13 @@ export default function Genre() {
                 })
             )}
           </Frame>
-          <FloatingFilter ref={scope} top={scrollY.current}>
-            {cur.filter}
-          </FloatingFilter>
+          {movie === undefined ? (
+            <></>
+          ) : (
+            <FloatingFilter ref={scope} top={scrollY.current}>
+              {cur.filter}
+            </FloatingFilter>
+          )}
         </>
       )}
     </Layout>

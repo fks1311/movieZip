@@ -77,7 +77,3 @@ export const Container = styled.div`
     max-width: 40vw;
   }
 `;
-
-export const FloatingFilter = styled.div`
-  font-size: 1.5rem;
-`;

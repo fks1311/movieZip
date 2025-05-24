@@ -8,7 +8,9 @@ import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useAnimate, useMotionValueEvent, useScroll } from "framer-motion";
-import { Container, FloatingFilter, Frame, Layout } from "@/styles/common";
+import { Container, Frame, Layout } from "@/styles/common";
+import { FloatingFilter } from "@/components/FloatingFilter";
+import NotFound from "@/components/NotFound";
 
 export default function Year() {
   const router = useRouter();
@@ -65,7 +67,7 @@ export default function Year() {
         <>
           <Frame>
             {movie === undefined ? (
-              <>없음</>
+              <NotFound />
             ) : (
               movie.map((data, idx) => {
                 return (
@@ -77,9 +79,13 @@ export default function Year() {
               })
             )}
           </Frame>
-          <FloatingFilter ref={scope} top={scrollY.current}>
-            {cur.filter}
-          </FloatingFilter>
+          {movie === undefined ? (
+            <></>
+          ) : (
+            <FloatingFilter ref={scope} top={scrollY.current}>
+              {cur.filter}
+            </FloatingFilter>
+          )}
         </>
       )}
     </Layout>
